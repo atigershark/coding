@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>hippopotamus!</title>
+    <link rel="icon" href="http://www.outsideonline.com/sites/default/files/migrated-images/wild-orca-alaska_si.jpg">
+
+</head>
+<body>
+<h1>
+let's type something in it.	
+</h1> 
+<B>
+wow.
+</b>
+<br>
+<canvas id="anibaba" width="1000" height="1000" style=""> </canvas>
+<br>
+
+
+
+
+<p>
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa 
+</p>
+<script> 
+var canvas = document.getElementById("anibaba");
+var ctx = canvas.getContext("2d");
+
+var width = canvas.width;
+var height = canvas.height;
+var blockSize = 10
+
+var drawBorder = function(color,x,y,width,height,blockSize) {
+      ctx.fillStyle = color;
+      ctx.fillRect(x, y, width, blockSize);
+      ctx.fillRect(x, y + height - blockSize, width, blockSize);
+      ctx.fillRect(x, y, blockSize, height);
+      ctx.fillRect(x + width - blockSize, y, blockSize, height);
+};
+
+var drawName = function (name,x,y) {
+      ctx.font = "20px Courier";
+      ctx.fillStyle = "Black";
+      ctx.textAlign = "left";
+      ctx.textBaseline = "top";
+      ctx.fillText(name, x, y);
+    };
+
+var drawCircle = function(color, x, y, radius) {
+	ctx.fillStyle = color;
+	ctx.beginPath();
+	ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+	ctx.fill();
+};
+
+var Block = function(r,c){
+	this.row = r;
+	this.col = c;
+};
+
+Block.prototype.drawSquare = function(){
+	var x = this.col * blockSize;
+	var y = this.row * blockSize;
+	ctx.fillStyle = "LightSkyBlue";
+	ctx.fillRect(x, y, blockSize, blockSize);
+
+};
+
+Block.prototype.drawCircle = function(){
+	var x = this.col * blockSize;
+	var y = this.row * blockSize;
+	ctx.fillStyle = "Crimson";
+	ctx.beginPath();
+	ctx.arc(x, y, blockSize, 0, Math.PI * 2, false);
+	ctx.fill();
+};
+
+Block.prototype.clearSquare = function(){
+	var x = this.col * blockSize;
+	var y = this.row * blockSize;
+	ctx.clearRect(x, y, blockSize, blockSize);
+};
+
+var Snake = function(){
+	 this.body = [
+		new Block(50,50),
+		new Block(50,51),
+		new Block(50,52)
+	];
+	this.direction = "left";
+};
+
+Snake.prototype.draw = function(){
+	for(b=0; b<this.body.length; b=b+1)
+	{
+		this.body[b].drawSquare();
+	}
+};
+
+Snake.prototype.move = function(){
+	var head = this.body[0];
+	var newHead = new Block(head.row,head.col);
+	this.body.unshift(newHead);
+	if (this.direction == "left"){
+		newHead.col = newHead.col-1
+	}
+	if (this.direction == "right"){
+		newHead.col = newHead.col+1
+	}
+	if (this.direction == "up"){
+		newHead.row = newHead.row-1
+	}
+	if (this.direction == "down"){
+		newHead.row = newHead.row+1
+	}
+	var tail = this.body.pop();
+	tail.clearSquare()
+};
+
+var Apple = function() {
+	this.location = new Block (70,70)
+};
+
+Apple.prototype.draw = function(){
+	this.location.drawCircle();
+};
+
+Apple.prototype.move = function(){
+	var c = Math.floor(Math.random() * (width/blockSize - 2)) + 1
+	var r = Math.floor(Math.random() * (height/blockSize - 2)) + 1
+		this.location.row = r
+		this.location.col = c
+};
+
+
+
+
+
+/*drawBorder("Blue", 200,367,77,92,10);
+
+drawBorder("Red", 100,367,77,92,10);
+
+drawBorder("Pink", 100,167,77,92,10);
+
+drawBorder("LimeGreen", 200,167,77,92,10);
+
+drawName ("Ananya Singh", 200, 70)
+drawName ("Fribola the Comadreja and the El Gato who is Afraid of Los Perros", 10, 645)
+
+drawCircle("SpringGreen", 575, 600, 23)
+
+var b1 = new Block(60, 60);
+b1.drawSquare();
+
+var b2 = new Block(60,61);
+b2.drawSquare();
+
+var b3 = new Block(60, 62);
+b3.drawSquare();
+
+var b4 = new Block(60, 63);
+b4.drawSquare();
+
+var b5 = new Block(60, 64);
+b5.drawSquare();
+
+var b6 = new Block(60, 65);
+b6.drawSquare();
+
+for(c=60; c<80; c=c+1){
+	var b=new Block(70,c);
+	b.drawSquare();
+}
+*/
+drawBorder("GreenYellow", 0,0,width,height,blockSize)
+
+var theSnake = new Snake();
+theSnake.direction = "up";
+theSnake.draw();
+
+var theApple = new Apple();
+theApple.draw();
+
+/*for(k=7; k<23; k=k+1){
+	theSnake.move();
+	theSnake.draw();
+}*/
+
+var timer_id;
+var timer_count = 0;
+
+var snake_1step = function(){
+	theSnake.move();
+	theSnake.draw();
+	theApple.move();
+	theApple.draw();
+
+    timer_count = timer_count + 1;
+    if (timer_count > 23)
+    {
+    	clearInterval(timer_id);
+    }
+};
+
+timer_id = setInterval(snake_1step, 1000);
+
+
+ </script>
+
+</body>
+</html>
