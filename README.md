@@ -32,3 +32,8 @@
 
     <script src="jquery.js"></script>
 
+Math.random()
+series
+while
+fiboncci
+if/else
