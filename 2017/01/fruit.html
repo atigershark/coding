@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>The Fruit Store</title>
+		<style>
+			body {
+				background-color: lightpink;
+				font-size: 30px;
+				text-align:center;
+			}
+			h1 {
+				color: navyblue;
+				font-size: 40px;
+			}
+		</style>
+		<script>
+			var fruitArray = ["pomegranates","bananas","oranges","apples","grapes"]
+			var priceArray = [1.99,0.29,2.99,3.29,3.99]
+
+			function sortFruit()
+			{
+				for (i=fruitArray.length; i>1; i--)
+				{
+					for (j=0; j<i-1; j++)
+					{
+						if (fruitArray[j] > fruitArray[j+1])
+						{
+							holdword = fruitArray[j];
+							fruitArray[j] = fruitArray[j+1];
+							fruitArray[j+1] = holdword;
+						}
+					}
+				}
+			}
+			function displayFruit()
+			{
+
+			}
+			function addFruit()
+			{
+
+			}
+		</script>
+	</head>
+	<body id = "bodyId">
+		<h1>The Fruit Store</h1>
+		<input type = "button" id = "btnSort" value = "Sort by Name" onClick = "sortFruit()">
+		<input type = "button" id = "btnDisp" value = "Display Inventory" onClick = "displayFruit()">
+		<div id = "divId">
+		</div>
+	</body>
+</html>
+
+
+

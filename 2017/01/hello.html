@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width">
+<head>
+<title> Hello World! </title>
+<!--if you want-->
+<style type= "text/css">
+body {
+	/* background-image: url("nackgroundimage.jpg"); */
+	background-color: salmon;
+	text-align: center;
+}
+h1 {
+	color: turquoise;
+}
+.funFont {
+	font-family: Broadway, Playbill, "Harlow Solid Italic";
+}
+p {
+	text-indent: 10px;
+	text-align: left;
+	font-weight: bold;
+	font-size: 16pt;
+}
+.message {
+	color: blue;
+	font-size: 18pt;
+}
+#NameBox {
+	color: red;
+	background-color: blue;
+}
+</style>
+<script>
+function checkData()
+{
+	var personName = document.getElementById("txtName").value;
+	if (personName == "Name" || personName == "")
+	{
+		//alert("Please fill in your name")
+		document.getElementById("txtName").value = "";
+		document.getElementById("txtName").focus();
+		document.getElementById("NameBox").innerHTML = "*Required";
+		return false;
+	}
+	else
+	{
+		sayHello(personName);
+	}
+}
+function sayHello(personName)
+{
+	document.getElementById("textPlace").innerHTML = 'Hello, ' + personName + '!';
+	document.getElementById("cmdOK").style.color = 'red';
+	document.getElementById("txtName").style.backgroundColor = 'lightblue';
+	document.getElementById("NameBox").innerHTML = "";
+	//window.alert('Notice the differences?');
+}
+function clearPage()
+{
+	document.getElementById("txtName").style.backgroundColor = 'white';
+	document.getElementById("textPlace").innerHTML = "AP Computer Science Principles";
+	document.getElementById("NameBox").innerHTML = "for error";
+	document.getElementById("cmdOK").style.color = '';
+}
+</script>
+</head>
+
+<body>
+	<h1> AP CSP </h1>
+	<h1> 2016-2017 </h1>
+	<hr width=82% />
+	<form id=frmInfo>
+		Enter your name for a personalized greeting:
+		<input type=text id=txtName value="Name">
+		<span id=NameBox>for error
+		</span>
+		<!--<hr size=36 /> -->
+		<br> Click here to see your message
+		<br>
+		<input type="button" id="cmdOK" value="Display message" onClick="checkData()" >
+		<input type=reset value= "Start Over" onClick="clearPage()">
+	</form>
+<!-- <img src="pictureName.png" width=20% /> -->
+<div id=textPlace class=message>AP Computer Science Principles
+</div>
+</body>
+</html>
