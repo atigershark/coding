@@ -1,5 +1,25 @@
-# coding
+# Coding Notes for Ananya
+## Python
 
+See also: 2017/11/python101.ipynb in Jupyter Notebook
+
+### Basic data types
+    integer, string, float, boolean
+    100, 'ananya', 3.14, True, False
+### Operations on basic types
+### Variables
+    i = 11, f = 3.14, s = "ananya"
+### More types
+    list, dictionary, set
+### Operations on lists
+    l = [1,2,3]
+    m = [100,200,300]
+    n = l + m
+
+---
+
+## HTML/Javascript
+### Tags and basics of JS
     <b> ... </b>
     <h1> ... </h1>
 
@@ -32,8 +52,10 @@
 
     <script src="jquery.js"></script>
 
-Math.random()
-series
-while
-fiboncci
-if/else
+### JS functions
+    Math.random()
+    series
+    while
+    fibonacci
+    if/else
+
